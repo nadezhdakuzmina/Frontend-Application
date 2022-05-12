@@ -1,38 +1,61 @@
-.App {
-  text-align: center;
+
+.button {
+  margin: 5px;
+  border-radius: 4px;
+  align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.button_Navigation {
   display: flex;
+  justify-content: center;
+  text-decoration: none;
+  min-width: 100px;
+  margin-right: 10px;
+}
+
+.button_Close {
+  width: 20px;
+  height: 20px;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
+  padding-top: 5rem;
+  width: 600px;
+}
+
+.done {
+  text-decoration: line-through;
+}
+
+.formAdd {
+  padding-bottom: 20px ;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.inputAdd {
+  width: 75%;
+  margin-right: 15px;
 }

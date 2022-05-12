@@ -1,0 +1,44 @@
+.frigeItem {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+  align-items: center;
+  padding: 5px 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.frigeList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sizeColor {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.addClose {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px;
+}
+
+.frigeType {
+  display: flex;
+  align-items: center;
+}
+
+.inputAdd {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.addForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
