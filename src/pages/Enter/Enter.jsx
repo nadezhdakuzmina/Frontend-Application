@@ -2,11 +2,10 @@ import { useState, useContext } from 'react';
 
 import { Context } from '../../containers/LogicLayout';
 
-function Registration () {
-  const { handleRegister } = useContext(Context);
+function Enter () {
+  const { handleAuth } = useContext(Context);
 
   const [email, setEmail] = useState(null);
-  const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
 
   const [error, setError] = useState(null);
@@ -16,18 +15,13 @@ function Registration () {
     setEmail(event.target.value);
   };
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
-
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
   const handleSubmit = () => {
-    handleRegister({
+    handleAuth({
       email,
-      username,
       password,
     })
       .then(() => {
@@ -42,14 +36,14 @@ function Registration () {
 
   return (
     <div className="wrapper">
-      <input placeholder="Имя" onChange={handleUsernameChange} type='text' />
-      <input placeholder="Почта" onChange={handleEmailChange} type='email' />
-      <input placeholder="Пароль" onChange={handlePasswordChange} type='password' />
-      <button onClick={handleSubmit}>Зарегистрироваться</button>
+      <span>Введите почту</span>
+      <input onChange={handleEmailChange} type='email' />
+      <span>Введите пароль</span>
+      <input onChange={handlePasswordChange} type='password' />
+      <button onClick={handleSubmit}>Войти</button>
       {error && <b className="error">{JSON.stringify(error)}</b>}
       {isSuccess && <b className="success">Успешно</b>}
     </div>
   );
 }
-
-export default Registration;
+export default Enter;

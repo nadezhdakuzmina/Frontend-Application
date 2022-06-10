@@ -1,17 +1,30 @@
-import React, {useState} from "react";
-import PropTypes from "prop-types";
+import React, { useState, useContext } from "react";
+import { Context } from "../../containers/LogicLayout";
 
 import getCurrentDate from '../../utils/get-current-date';
 
 function AddProductForm({
-  onCreate,
   onClose,
 }){
   const [value, setValue] = useState (null);
   const [valueDate, setValueDate] = useState (getCurrentDate());
   const [valueCategory, setValueCategory] = useState (null);
 
-  function submitHandler(event){
+  const { handleAddFrigeItem } = useContext(Context);
+
+  const addFrigeItem = (event) => {
+    event.preventDefault();
+
+    if (!valueCategory || !valueDate || !value) {
+      return;
+    } 
+    if (value) {
+      handleAddFrigeItem(value, new Date(valueDate).getTime(), valueCategory);
+      onClose();
+    }
+  };
+
+/*   function submitHandler(event){
     event.preventDefault();
 
     if (!valueCategory || !valueDate || !value) {
@@ -22,7 +35,7 @@ function AddProductForm({
       onCreate(value, new Date(valueDate), valueCategory);
       onClose();
     }
-  }
+  } */
 
   return (
     <div className="addForm">
@@ -50,7 +63,7 @@ function AddProductForm({
       </select>
       </div>
       <div className="addClose">
-        <button type="submit" onClick={submitHandler} className="button_Add button" >
+        <button type="submit" onClick={addFrigeItem} className="button_Add button" >
           Добавить продукт
         </button>
         <button onClick={onClose} className="button button_Close">
@@ -61,9 +74,5 @@ function AddProductForm({
   );
 }
 
-AddProductForm.propTypes = {
-  onCreate: PropTypes.func.isRequired,
-  onClose: PropTypes.func.isRequired
-}
 
 export default AddProductForm;

@@ -1,12 +1,23 @@
-import React from "react";
-import { useContext } from "react";
-import Context from "./context";
+import React, { useContext } from "react";
+import { Context } from "../../containers/LogicLayout";
 
-export default function ListItem({productList, index, onChange}) {
-  const { removeTodo } = useContext(Context);
+export default function ListItem({
+  item,
+  index
+}) {
+  const { handleDeleteCartItem, handleChangeItemStatus} = useContext(Context);
+
+  const remove = () => {
+    handleDeleteCartItem(item.id);
+  };
+
+  const onChange = () => {
+    handleChangeItemStatus(item.id, !item.isChecked);
+  };
+
   const classes = [];
 
-  if (productList.completed) {
+  if (item.isChecked) {
     classes.push('done');
   }
 
@@ -14,14 +25,14 @@ export default function ListItem({productList, index, onChange}) {
     <li className="listItem">
       <span className={classes.join(' ')}>
         <input type="checkbox"
-        onChange={() => onChange(productList.id)} 
-        checked={productList.completed}
+          onChange={onChange} 
+          checked={item.isChecked}
         />
         <strong>{index+1}</strong>
         &nbsp;
-        {productList.title}
+        {item.name}
       </span>
-      <button onClick={() => removeTodo(productList.id)}>
+      <button onClick={remove}>
         &times;
       </button>
     </li>

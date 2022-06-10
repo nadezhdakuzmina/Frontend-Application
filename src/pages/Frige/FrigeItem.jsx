@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
-import Context from "./context";
 import countTime from "../../utils/count-time";
+import { Context } from "../../containers/LogicLayout";
 
 const CATEGORY_COLORS = {
   backery: 'blue',
@@ -10,31 +10,32 @@ const CATEGORY_COLORS = {
 };
 
 export default function FrigeItem({productFrige}) {
-  const { removeTodo } = useContext(Context);
-  const classes = [];
+  const { handleDeleteFrigeItem } = useContext(Context);
 
-  if (productFrige.completed) {
-    classes.push('done');
-  }
+  const remove = () => {
+    handleDeleteFrigeItem(productFrige.id);
+  };
 
-  const color = CATEGORY_COLORS[productFrige.category];
-  const nowTime = countTime(productFrige.time);
+  console.log(productFrige)
+
+  const color = CATEGORY_COLORS[productFrige.foodType];
+  const timeLast = countTime(Number(productFrige.expires));
 
   return (
     <li className="frigeItem">
       <div style={{ backgroundColor: color }} className="sizeColor">
       </div>
-      <span className={classes.join(' ')}>
+      <span>
         {productFrige.title}
       </span>
         <a>{
-          nowTime == 0 ? (
+          timeLast == 0 ? (
             'Сегодня истекает срок годности') : 
-            nowTime <= 0 ? 
-              (`Истёк срок годности  ${-nowTime}  дня назад`):
-              (`Осталось:  ${nowTime}  дней`) 
+            timeLast <= 0 ? 
+              (`Истёк срок годности  ${-timeLast}  дня назад`):
+              (`Осталось:  ${timeLast}  дней`) 
         } </a>
-      <button onClick={() => removeTodo(productFrige.id)} className="button" >&times;</button>
+      <button onClick={remove} className="button" >&times;</button>
     </li>
   );
 }

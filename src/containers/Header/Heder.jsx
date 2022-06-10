@@ -1,9 +1,14 @@
-import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import './Header.css';
 
+import { Context } from '../LogicLayout';
+
 function Header () {
-  let isAuthorized = true;
+  const {
+    isAuthorized,
+    handleLogout,
+  } = useContext(Context);
 
   if (isAuthorized) {
     return(
@@ -17,6 +22,7 @@ function Header () {
       <Link to="/">
         <button className="button_Navigation">Профиль</button>
       </Link>
+      <button onClick={handleLogout} className="button_Navigation">Выйти</button>
     </div>
     );
   }
@@ -26,7 +32,7 @@ function Header () {
       <Link to="/registration">
         <button className="button_Navigation">Зарегистрироваться</button>
       </Link>
-      <Link to="/enter">
+      <Link to="/">
         <button className="button_Navigation">Войти</button>
       </Link>
     </div>

@@ -4,7 +4,7 @@ import FrigeItem from './FrigeItem';
 function FrigeList (props) {
   return (
     <ul className="frigeList">
-      { props.productsFrige.map((productFrige, index) => {
+      { props.frigeItems.map((productFrige, index) => {
         return <FrigeItem productFrige={productFrige} key={productFrige.id} index={index} />
       })}
     </ul>

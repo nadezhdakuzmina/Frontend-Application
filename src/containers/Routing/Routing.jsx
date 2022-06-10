@@ -1,13 +1,16 @@
-import {Routes, Route} from "react-router-dom"
+import { useContext } from 'react';
+import { Routes, Route } from "react-router-dom";
+
 import Frige from "../../pages/Frige";
 import Profile from "../../pages/Profile/Profile";
 import ProductsList from "../../pages/ProductsList";
 import Registration from "../../pages/Registration";
-import Enter from "../Enter";
+import Enter from "../../pages/Enter";
+
+import { Context } from '../LogicLayout';
 
 function Routing () {
-
-  let isAuthorized = true;
+  const { isAuthorized } = useContext(Context);
 
   if (isAuthorized) {
     return (
@@ -22,7 +25,7 @@ function Routing () {
   return (
     <Routes>
       <Route exact path="/registration" element={<Registration />} />
-      <Route exact path="/enter" element={<Enter />} />
+      <Route exact path="/" element={<Enter />} />
     </Routes>
   );
 }

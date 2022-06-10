@@ -1,25 +1,20 @@
-import React, {useState} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import FrigeList from "./FrigeList";
-import Context from "./context";
 import AddProductForm from "./AddProductForm";
 import './Frige.css';
+import { Context } from "../../containers/LogicLayout";
 
 function Frige() {
-  let [productsFrige, setState] = useState([
-    {id: 1, completed: false, category: 'milk', title: 'Хлеб', time: new Date()},
-    {id: 2, completed: false, category: 'backery', title: 'Молоко', time: new Date()},
-    {id: 3, completed: false, category: 'dry', title: 'Сахар', time: new Date()}
-  ])
 
   const [form, setForm] = useState(true);
-
-  function removeTodo (id) {
-    setState(productsFrige.filter(productFrige => productFrige.id !== id))
-  }
+  const {frigeItems, setFrigeItems, handleGetFrigeItems} = useContext(Context);
+  useEffect(() => {
+    handleGetFrigeItems();
+  }, []);
 
   function addProductForm (title, time, category) {
-    setState([
-      ...productsFrige,
+    setFrigeItems([
+      ...frigeItems,
       {
         time,
         title,
@@ -39,17 +34,15 @@ function Frige() {
   }
 
   return (
-    <Context.Provider value={{removeTodo}}>
-      <div className="wrapper">
-        <h1> Список продуктов</h1>
-        {form ? (
-          <button onClick={openForm} className="button button_Close" > + </button>
-        ) : (
-          <AddProductForm onClose={closeForm} onCreate={addProductForm} />
-        )}
-        {productsFrige.length ?  <FrigeList productsFrige={productsFrige} /> : <p>Нет продуктов</p>}
-      </div>
-    </Context.Provider>
+    <div className="wrapper">
+      <h1> Список продуктов</h1>
+      {form ? (
+        <button onClick={openForm} className="button button_Close" > + </button>
+      ) : (
+        <AddProductForm onClose={closeForm} onCreate={addProductForm} />
+      )}
+      {frigeItems?.length ?  <FrigeList frigeItems={frigeItems} /> : <p>Нет продуктов</p>}
+    </div>
   );
 }
 

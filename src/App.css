@@ -14,7 +14,6 @@
 }
 
 .button_Close {
-  width: 20px;
   height: 20px;
 }
 
@@ -58,4 +57,16 @@ code {
 .inputAdd {
   width: 75%;
   margin-right: 15px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin: 10px 0; 
+}
+
+.success {
+  color: green;
+  font-size: 14px;
+  margin: 10px 0;
 }

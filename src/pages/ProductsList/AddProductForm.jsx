@@ -1,28 +1,23 @@
-import React, {useState} from "react";
-import PropTypes from "prop-types";
+import React, { useState, useContext } from "react";
+import { Context } from "../../containers/LogicLayout";
 
+function AddProduct(){
+  const [value, setValue] = useState('');
 
-function AddProduct({onCreate}){
-  const [value, setValue] = useState ('')
+  const { handleAddCartItem } = useContext(Context);
 
-  function submitHandler(event){
-    event.preventDefault()
-
-    if(value.trim()) {
-      onCreate(value);
-      setValue('');
+  const addCartItem = () => {
+    if (value) {
+      handleAddCartItem(value);
     }
-  }
-  return (
-  <form className="formAdd" onSubmit={submitHandler}>
-    <input className="inputAdd" value={value} onChange={ event => setValue(event.target.value)} />
-    <button type="submit" className="button button_Add">Добавить продукт</button>
-  </form>
-  )
-}
+  };
 
-AddProduct.propTypes = {
-  onCreate: PropTypes.func.isRequired
+  return (
+    <>
+      <input className="inputAdd" value={value} onChange={ event => setValue(event.target.value)} />
+      <button className="button button_Add" onClick={addCartItem}>Добавить продукт</button>
+    </>
+  )
 }
 
 export default AddProduct;
